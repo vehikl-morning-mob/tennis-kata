@@ -1,3 +1,7 @@
+import TennisGame1 from "../TennisGame1";
+import TennisGame2 from "../TennisGame2";
+import TennisGame3 from "../TennisGame3";
+
 const cases = [
   [0, 0, "Love-All"],
   [1, 1, "Fifteen-All"],
