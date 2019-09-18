@@ -49,20 +49,21 @@ const games = [
   ["Game 3", TennisGame3]
 ];
 
+function awardPoints(game, player, points) {
+  for (let i = 0; i < points; i++) {
+    game.wonPoint(player);
+  }
+}
+
 describe.each(games)("%p", (_, GameClass) => {
   test.each(cases)(
     "for %p-%p it can report game score of %p",
     (player1Score, player2Score, expectedScore) => {
       const game = new GameClass("player1", "player2");
-      const highestScore = Math.max(player1Score, player2Score);
-      for (let i = 0; i < highestScore; i++) {
-        if (i < player1Score) {
-          game.wonPoint("player1");
-        }
-        if (i < player2Score) {
-          game.wonPoint("player2");
-        }
-      }
+
+      awardPoints(game, "player1", player1Score);
+      awardPoints(game, "player2", player2Score);
+
       expect(game.getScore()).toBe(expectedScore);
     }
   );
