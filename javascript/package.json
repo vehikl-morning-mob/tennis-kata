@@ -1,0 +1,40 @@
+{
+  "name": "tennis-refactoring-kata",
+  "version": "1.0.0",
+  "description": "Tests are available to be run both with node.js and in the browser. For node, simply call   node TennisTest.js (Only failures will be shown on the console)",
+  "main": "TennisTest.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vehikl/Tennis-Refactoring-Kata.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vehikl/Tennis-Refactoring-Kata/issues"
+  },
+  "homepage": "https://github.com/vehikl/Tennis-Refactoring-Kata#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "1.7.0",
+    "babel-register": "^6.26.0",
+    "jest": "^24.7.1"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": []
+  }
+}
