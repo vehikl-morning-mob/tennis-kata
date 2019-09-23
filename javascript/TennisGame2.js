@@ -9,7 +9,7 @@ export default class TennisGame2 {
   }
 
   getScore() {
-    var score = "";
+    let score = "";
     if (this.P1point === this.P2point && this.P1point < 3) {
       if (this.P1point === 0) score = "Love";
       if (this.P1point === 1) score = "Fifteen";
@@ -69,14 +69,14 @@ export default class TennisGame2 {
   }
 
   SetP1Score(number) {
-    var i;
+    let i;
     for (i = 0; i < number; i++) {
       this.P1Score();
     }
   }
 
   SetP2Score(number) {
-    var i;
+    let i;
     for (i = 0; i < number; i++) {
       this.P2Score();
     }
