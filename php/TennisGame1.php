@@ -16,8 +16,8 @@ class TennisGame1 implements TennisGame
     private const WIN_FOR_PLAYER_1 = "Win for player1";
     private const WIN_FOR_PLAYER_2 = "Win for player2";
     private const PLAYER_1_NAME = 'player1';
-    private $m_score1 = 0;
-    private $m_score2 = 0;
+    private $player1NumericalScore = 0;
+    private $player2NumericalScore = 0;
     private $player1Name = '';
     private $player2Name = '';
 
@@ -30,16 +30,16 @@ class TennisGame1 implements TennisGame
     public function wonPoint($playerName)
     {
         if (self::PLAYER_1_NAME == $playerName) {
-            $this->m_score1++;
+            $this->player1NumericalScore++;
         } else {
-            $this->m_score2++;
+            $this->player2NumericalScore++;
         }
     }
 
     public function getScore()
     {
         $score = "";
-        if ($this->m_score1 == $this->m_score2) {
+        if ($this->player1NumericalScore == $this->player2NumericalScore) {
             $score = $this->stringifyScoreForTiedGame();
         } elseif ($this->isAtLeastOnePlayerAboveTheMaxScore()) {
             $score = $this->stringifyScoreForLateGame();
@@ -67,10 +67,10 @@ class TennisGame1 implements TennisGame
     {
         for ($i = 1; $i < 3; $i++) {
             if ($i == 1) {
-                $tempScore = $this->m_score1;
+                $tempScore = $this->player1NumericalScore;
             } else {
                 $score .= "-";
-                $tempScore = $this->m_score2;
+                $tempScore = $this->player2NumericalScore;
             }
             $strigifiedScores = [self::LOVE, self::FIFTEEN, self::THIRTY, self::FORTY,];
             $score .= $strigifiedScores[$tempScore];
@@ -80,7 +80,7 @@ class TennisGame1 implements TennisGame
 
     public function stringifyScoreForTiedGame(): string
     {
-        switch ($this->m_score1) {
+        switch ($this->player1NumericalScore) {
             case 0:
                 $score = self::LOVE_ALL;
                 break;
@@ -99,7 +99,7 @@ class TennisGame1 implements TennisGame
 
     public function isAdvantagePlayer2(): bool
     {
-        return ($this->m_score1 - $this->m_score2) == -1;
+        return ($this->player1NumericalScore - $this->player2NumericalScore) == -1;
     }
 
     /**
@@ -108,7 +108,7 @@ class TennisGame1 implements TennisGame
      */
     public function isAdvantagePlayer1(): bool
     {
-        return ($this->m_score1 - $this->m_score2) == 1;
+        return ($this->player1NumericalScore - $this->player2NumericalScore) == 1;
     }
 
     /**
@@ -117,12 +117,12 @@ class TennisGame1 implements TennisGame
      */
     public function isWinPlayer1(): bool
     {
-        return ($this->m_score1 - $this->m_score2) >= 2;
+        return ($this->player1NumericalScore - $this->player2NumericalScore) >= 2;
     }
 
     public function isAtLeastOnePlayerAboveTheMaxScore(): bool
     {
-        return $this->m_score1 >= self::MAX_TOTAL || $this->m_score2 >= self::MAX_TOTAL;
+        return $this->player1NumericalScore >= self::MAX_TOTAL || $this->player2NumericalScore >= self::MAX_TOTAL;
     }
 }
 
