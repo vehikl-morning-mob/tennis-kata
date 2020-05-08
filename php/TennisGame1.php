@@ -56,37 +56,53 @@ class TennisGame1 implements TennisGame
             }
         } elseif ($this->m_score1 >= self::MAX_TOTAL || $this->m_score2 >= self::MAX_TOTAL) {
             $minusResult = $this->m_score1 - $this->m_score2;
-            if ($minusResult == 1) {
-                $score = self::ADVANTAGE_PLAYER_1;
-            } elseif ($minusResult == -1) {
-                $score = self::ADVANTAGE_PLAYER_2;
-            } elseif ($minusResult >= 2) {
-                $score = self::WIN_FOR_PLAYER_1;
-            } else {
-                $score = self::WIN_FOR_PLAYER_2;
-            }
+            $score = $this->stringifyScoreForTiedGame($minusResult);
         } else {
-            for ($i = 1; $i < 3; $i++) {
-                if ($i == 1) {
-                    $tempScore = $this->m_score1;
-                } else {
-                    $score .= "-";
-                    $tempScore = $this->m_score2;
-                }
-                switch ($tempScore) {
-                    case 0:
-                        $score .= self::LOVE;
-                        break;
-                    case 1:
-                        $score .= self::FIFTEEN;
-                        break;
-                    case 2:
-                        $score .= self::THIRTY;
-                        break;
-                    case 3:
-                        $score .= self::FORTY;
-                        break;
-                }
+            $score = $this->stringifyScoreForUntiedGame($score);
+        }
+        return $score;
+    }
+
+    /**
+     * @param int $minusResult
+     * @return string
+     */
+    public function stringifyScoreForTiedGame(int $minusResult): string
+    {
+        if ($minusResult == 1) {
+            $score = self::ADVANTAGE_PLAYER_1;
+        } elseif ($minusResult == -1) {
+            $score = self::ADVANTAGE_PLAYER_2;
+        } elseif ($minusResult >= 2) {
+            $score = self::WIN_FOR_PLAYER_1;
+        } else {
+            $score = self::WIN_FOR_PLAYER_2;
+        }
+        return $score;
+    }
+
+    public function stringifyScoreForUntiedGame(string $score): string
+    {
+        for ($i = 1; $i < 3; $i++) {
+            if ($i == 1) {
+                $tempScore = $this->m_score1;
+            } else {
+                $score .= "-";
+                $tempScore = $this->m_score2;
+            }
+            switch ($tempScore) {
+                case 0:
+                    $score .= self::LOVE;
+                    break;
+                case 1:
+                    $score .= self::FIFTEEN;
+                    break;
+                case 2:
+                    $score .= self::THIRTY;
+                    break;
+                case 3:
+                    $score .= self::FORTY;
+                    break;
             }
         }
         return $score;
