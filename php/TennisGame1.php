@@ -41,7 +41,7 @@ class TennisGame1 implements TennisGame
         $score = "";
         if ($this->m_score1 == $this->m_score2) {
             $score = $this->stringifyScoreForTiedGame();
-        } elseif ($this->m_score1 >= self::MAX_TOTAL || $this->m_score2 >= self::MAX_TOTAL) {
+        } elseif ($this->isAtLeastOnePlayerAboveTheMaxScore()) {
             $score = $this->stringifyScoreForLateGame();
         } else {
             $score = $this->stringifyScoreForUntiedGame($score);
@@ -118,6 +118,11 @@ class TennisGame1 implements TennisGame
     public function isWinPlayer1(): bool
     {
         return ($this->m_score1 - $this->m_score2) >= 2;
+    }
+
+    public function isAtLeastOnePlayerAboveTheMaxScore(): bool
+    {
+        return $this->m_score1 >= self::MAX_TOTAL || $this->m_score2 >= self::MAX_TOTAL;
     }
 }
 
