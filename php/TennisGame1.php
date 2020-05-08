@@ -63,10 +63,6 @@ class TennisGame1 implements TennisGame
         return $score;
     }
 
-    /**
-     * @param int $minusResult
-     * @return string
-     */
     public function stringifyScoreForTiedGame(int $minusResult): string
     {
         if ($minusResult == 1) {
