@@ -51,9 +51,9 @@ class TennisGame1 implements TennisGame
 
     public function stringifyScoreForLateGame(): string
     {
-        if ($this->isAdvantagePlayer1()) {
+        if ($this->isAdvantagePlayer(1)) {
             $score = self::ADVANTAGE_PLAYER_1;
-        } elseif ($this->isAdvantagePlayer2()) {
+        } elseif ($this->isAdvantagePlayer(-1)) {
             $score = self::ADVANTAGE_PLAYER_2;
         } elseif ($this->isWinPlayer1()) {
             $score = self::WIN_FOR_PLAYER_1;
@@ -90,24 +90,11 @@ class TennisGame1 implements TennisGame
         return $score;
     }
 
-    public function isAdvantagePlayer2(): bool
+    public function isAdvantagePlayer(int $score)
     {
-        return ($this->player1NumericalScore - $this->player2NumericalScore) == -1;
+        return ($this->player1NumericalScore - $this->player2NumericalScore) == $score;
     }
 
-    /**
-     * @param int $minusResult
-     * @return bool
-     */
-    public function isAdvantagePlayer1(): bool
-    {
-        return ($this->player1NumericalScore - $this->player2NumericalScore) == 1;
-    }
-
-    /**
-     * @param int $minusResult
-     * @return bool
-     */
     public function isWinPlayer1(): bool
     {
         return ($this->player1NumericalScore - $this->player2NumericalScore) >= 2;
