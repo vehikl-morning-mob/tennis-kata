@@ -42,12 +42,7 @@ class TennisGame1 implements TennisGame
         if ($this->player1NumericalScore == $this->player2NumericalScore) {
             $score = $this->stringifyScoreForTiedGame();
         } elseif ($this->isAtLeastOnePlayerAboveTheMaxScore()) {
-            if (abs($this->getDeltaScore()) >= 2) {
-                $score = $this->showWinnerName();
-            } else {
-                $score = $this->showAdvantageeName();
-            }
-
+            $score = abs($this->getDeltaScore()) >= 2 ? $this->showWinnerName() : $this->showAdvantageeName();
         } else {
             $score = $this->stringifyScoreForUntiedGame($score);
         }
@@ -81,14 +76,9 @@ class TennisGame1 implements TennisGame
         return $score;
     }
 
-    public function isAdvantagePlayer(int $score)
-    {
-        return ($this->getDeltaScore()) == $score;
-    }
-
     public function isWinPlayer1(): bool
     {
-        return ($this->player1NumericalScore - $this->player2NumericalScore) >= 2;
+        return $this->getDeltaScore() >= 2;
     }
 
     public function isAtLeastOnePlayerAboveTheMaxScore(): bool
@@ -113,9 +103,9 @@ class TennisGame1 implements TennisGame
 
     public function showAdvantageeName(): string
     {
-        if ($this->isAdvantagePlayer(1)) {
+        if ($this->getDeltaScore() == 1) {
             $score = self::ADVANTAGE_PLAYER_1;
-        } elseif ($this->isAdvantagePlayer(-1)) {
+        } elseif ($this->getDeltaScore() == -1) {
             $score = self::ADVANTAGE_PLAYER_2;
         }
         return $score;
