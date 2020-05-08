@@ -2,6 +2,20 @@
 
 class TennisGame1 implements TennisGame
 {
+    private const MAX_TOTAL = 4;
+    private const LOVE_ALL = "Love-All";
+    private const FIFTEEN_ALL = "Fifteen-All";
+    private const THIRTY_ALL = "Thirty-All";
+    private const DEUCE = "Deuce";
+    private const LOVE = "Love";
+    private const FIFTEEN = "Fifteen";
+    private const THIRTY = "Thirty";
+    private const FORTY = "Forty";
+    private const ADVANTAGE_PLAYER_1 = "Advantage player1";
+    private const ADVANTAGE_PLAYER_2 = "Advantage player2";
+    private const WIN_FOR_PLAYER_1 = "Win for player1";
+    private const WIN_FOR_PLAYER_2 = "Win for player2";
+    private const PLAYER_1_NAME = 'player1';
     private $m_score1 = 0;
     private $m_score2 = 0;
     private $player1Name = '';
@@ -15,7 +29,7 @@ class TennisGame1 implements TennisGame
 
     public function wonPoint($playerName)
     {
-        if ('player1' == $playerName) {
+        if (self::PLAYER_1_NAME == $playerName) {
             $this->m_score1++;
         } else {
             $this->m_score2++;
@@ -28,28 +42,28 @@ class TennisGame1 implements TennisGame
         if ($this->m_score1 == $this->m_score2) {
             switch ($this->m_score1) {
                 case 0:
-                    $score = "Love-All";
+                    $score = self::LOVE_ALL;
                     break;
                 case 1:
-                    $score = "Fifteen-All";
+                    $score = self::FIFTEEN_ALL;
                     break;
                 case 2:
-                    $score = "Thirty-All";
+                    $score = self::THIRTY_ALL;
                     break;
                 default:
-                    $score = "Deuce";
+                    $score = self::DEUCE;
                     break;
             }
-        } elseif ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
+        } elseif ($this->m_score1 >= self::MAX_TOTAL || $this->m_score2 >= self::MAX_TOTAL) {
             $minusResult = $this->m_score1 - $this->m_score2;
             if ($minusResult == 1) {
-                $score = "Advantage player1";
+                $score = self::ADVANTAGE_PLAYER_1;
             } elseif ($minusResult == -1) {
-                $score = "Advantage player2";
+                $score = self::ADVANTAGE_PLAYER_2;
             } elseif ($minusResult >= 2) {
-                $score = "Win for player1";
+                $score = self::WIN_FOR_PLAYER_1;
             } else {
-                $score = "Win for player2";
+                $score = self::WIN_FOR_PLAYER_2;
             }
         } else {
             for ($i = 1; $i < 3; $i++) {
@@ -61,16 +75,16 @@ class TennisGame1 implements TennisGame
                 }
                 switch ($tempScore) {
                     case 0:
-                        $score .= "Love";
+                        $score .= self::LOVE;
                         break;
                     case 1:
-                        $score .= "Fifteen";
+                        $score .= self::FIFTEEN;
                         break;
                     case 2:
-                        $score .= "Thirty";
+                        $score .= self::THIRTY;
                         break;
                     case 3:
-                        $score .= "Forty";
+                        $score .= self::FORTY;
                         break;
                 }
             }
