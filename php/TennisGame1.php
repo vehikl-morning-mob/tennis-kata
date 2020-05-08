@@ -72,20 +72,8 @@ class TennisGame1 implements TennisGame
                 $score .= "-";
                 $tempScore = $this->m_score2;
             }
-            switch ($tempScore) {
-                case 0:
-                    $score .= self::LOVE;
-                    break;
-                case 1:
-                    $score .= self::FIFTEEN;
-                    break;
-                case 2:
-                    $score .= self::THIRTY;
-                    break;
-                case 3:
-                    $score .= self::FORTY;
-                    break;
-            }
+            $strigifiedScores = [self::LOVE, self::FIFTEEN, self::THIRTY, self::FORTY,];
+            $score .= $strigifiedScores[$tempScore];
         }
         return $score;
     }
