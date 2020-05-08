@@ -65,17 +65,10 @@ class TennisGame1 implements TennisGame
 
     public function stringifyScoreForUntiedGame(string $score): string
     {
-        for ($i = 1; $i < 3; $i++) {
-            if ($i == 1) {
-                $tempScore = $this->player1NumericalScore;
-            } else {
-                $score .= "-";
-                $tempScore = $this->player2NumericalScore;
-            }
-            $strigifiedScores = [self::LOVE, self::FIFTEEN, self::THIRTY, self::FORTY,];
-            $score .= $strigifiedScores[$tempScore];
-        }
-        return $score;
+        $stringifiedScores = [self::LOVE, self::FIFTEEN, self::THIRTY, self::FORTY,];
+        $player1StringifiedScore = $stringifiedScores[$this->player1NumericalScore];
+        $player2StringifiedScore = $stringifiedScores[$this->player2NumericalScore];
+        return $score.$player1StringifiedScore.'-'.$player2StringifiedScore;
     }
 
     public function stringifyScoreForTiedGame(): string
