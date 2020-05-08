@@ -42,23 +42,14 @@ class TennisGame1 implements TennisGame
         if ($this->player1NumericalScore == $this->player2NumericalScore) {
             $score = $this->stringifyScoreForTiedGame();
         } elseif ($this->isAtLeastOnePlayerAboveTheMaxScore()) {
-            $score = $this->stringifyScoreForLateGame();
+            if (abs($this->getDeltaScore()) >= 2) {
+                $score = $this->showWinnerName();
+            } else {
+                $score = $this->showAdvantageeName();
+            }
+
         } else {
             $score = $this->stringifyScoreForUntiedGame($score);
-        }
-        return $score;
-    }
-
-    public function stringifyScoreForLateGame(): string
-    {
-        if ($this->isAdvantagePlayer(1)) {
-            $score = self::ADVANTAGE_PLAYER_1;
-        } elseif ($this->isAdvantagePlayer(-1)) {
-            $score = self::ADVANTAGE_PLAYER_2;
-        } elseif ($this->isWinPlayer1()) {
-            $score = self::WIN_FOR_PLAYER_1;
-        } else {
-            $score = self::WIN_FOR_PLAYER_2;
         }
         return $score;
     }
@@ -92,7 +83,7 @@ class TennisGame1 implements TennisGame
 
     public function isAdvantagePlayer(int $score)
     {
-        return ($this->player1NumericalScore - $this->player2NumericalScore) == $score;
+        return ($this->getDeltaScore()) == $score;
     }
 
     public function isWinPlayer1(): bool
@@ -103,6 +94,31 @@ class TennisGame1 implements TennisGame
     public function isAtLeastOnePlayerAboveTheMaxScore(): bool
     {
         return $this->player1NumericalScore >= self::MAX_TOTAL || $this->player2NumericalScore >= self::MAX_TOTAL;
+    }
+
+    public function getDeltaScore(): int
+    {
+        return $this->player1NumericalScore - $this->player2NumericalScore;
+    }
+
+    public function showWinnerName(): string
+    {
+        if ($this->isWinPlayer1()) {
+            $score = self::WIN_FOR_PLAYER_1;
+        } else {
+            $score = self::WIN_FOR_PLAYER_2;
+        }
+        return $score;
+    }
+
+    public function showAdvantageeName(): string
+    {
+        if ($this->isAdvantagePlayer(1)) {
+            $score = self::ADVANTAGE_PLAYER_1;
+        } elseif ($this->isAdvantagePlayer(-1)) {
+            $score = self::ADVANTAGE_PLAYER_2;
+        }
+        return $score;
     }
 }
 
