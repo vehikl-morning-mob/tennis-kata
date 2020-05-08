@@ -40,30 +40,17 @@ class TennisGame1 implements TennisGame
     {
         $score = "";
         if ($this->m_score1 == $this->m_score2) {
-            switch ($this->m_score1) {
-                case 0:
-                    $score = self::LOVE_ALL;
-                    break;
-                case 1:
-                    $score = self::FIFTEEN_ALL;
-                    break;
-                case 2:
-                    $score = self::THIRTY_ALL;
-                    break;
-                default:
-                    $score = self::DEUCE;
-                    break;
-            }
+            $score = $this->stringifyScoreForTiedGame();
         } elseif ($this->m_score1 >= self::MAX_TOTAL || $this->m_score2 >= self::MAX_TOTAL) {
             $minusResult = $this->m_score1 - $this->m_score2;
-            $score = $this->stringifyScoreForTiedGame($minusResult);
+            $score = $this->stringifyScoreForLateGame($minusResult);
         } else {
             $score = $this->stringifyScoreForUntiedGame($score);
         }
         return $score;
     }
 
-    public function stringifyScoreForTiedGame(int $minusResult): string
+    public function stringifyScoreForLateGame(int $minusResult): string
     {
         if ($minusResult == 1) {
             $score = self::ADVANTAGE_PLAYER_1;
@@ -100,6 +87,25 @@ class TennisGame1 implements TennisGame
                     $score .= self::FORTY;
                     break;
             }
+        }
+        return $score;
+    }
+
+    public function stringifyScoreForTiedGame(): string
+    {
+        switch ($this->m_score1) {
+            case 0:
+                $score = self::LOVE_ALL;
+                break;
+            case 1:
+                $score = self::FIFTEEN_ALL;
+                break;
+            case 2:
+                $score = self::THIRTY_ALL;
+                break;
+            default:
+                $score = self::DEUCE;
+                break;
         }
         return $score;
     }
