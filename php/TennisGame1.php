@@ -42,21 +42,20 @@ class TennisGame1 implements TennisGame
         if ($this->m_score1 == $this->m_score2) {
             $score = $this->stringifyScoreForTiedGame();
         } elseif ($this->m_score1 >= self::MAX_TOTAL || $this->m_score2 >= self::MAX_TOTAL) {
-            $minusResult = $this->m_score1 - $this->m_score2;
-            $score = $this->stringifyScoreForLateGame($minusResult);
+            $score = $this->stringifyScoreForLateGame();
         } else {
             $score = $this->stringifyScoreForUntiedGame($score);
         }
         return $score;
     }
 
-    public function stringifyScoreForLateGame(int $minusResult): string
+    public function stringifyScoreForLateGame(): string
     {
-        if ($this->isAdvantagePlayer1($minusResult)) {
+        if ($this->isAdvantagePlayer1()) {
             $score = self::ADVANTAGE_PLAYER_1;
-        } elseif ($this->isAdvantagePlayer2($minusResult)) {
+        } elseif ($this->isAdvantagePlayer2()) {
             $score = self::ADVANTAGE_PLAYER_2;
-        } elseif ($this->isWinPlayer1($minusResult)) {
+        } elseif ($this->isWinPlayer1()) {
             $score = self::WIN_FOR_PLAYER_1;
         } else {
             $score = self::WIN_FOR_PLAYER_2;
@@ -110,27 +109,27 @@ class TennisGame1 implements TennisGame
         return $score;
     }
 
-    public function isAdvantagePlayer2(int $minusResult): bool
+    public function isAdvantagePlayer2(): bool
     {
-        return $minusResult == -1;
+        return ($this->m_score1 - $this->m_score2) == -1;
     }
 
     /**
      * @param int $minusResult
      * @return bool
      */
-    public function isAdvantagePlayer1(int $minusResult): bool
+    public function isAdvantagePlayer1(): bool
     {
-        return $minusResult == 1;
+        return ($this->m_score1 - $this->m_score2) == 1;
     }
 
     /**
      * @param int $minusResult
      * @return bool
      */
-    public function isWinPlayer1(int $minusResult): bool
+    public function isWinPlayer1(): bool
     {
-        return $minusResult >= 2;
+        return ($this->m_score1 - $this->m_score2) >= 2;
     }
 }
 
