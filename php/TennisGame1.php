@@ -93,12 +93,7 @@ class TennisGame1 implements TennisGame
 
     public function showWinnerName(): string
     {
-        if ($this->isWinPlayer1()) {
-            $score = self::WIN_FOR_PLAYER_1;
-        } else {
-            $score = self::WIN_FOR_PLAYER_2;
-        }
-        return $score;
+        return $this->isWinPlayer1() ? self::WIN_FOR_PLAYER_1 : self::WIN_FOR_PLAYER_2;
     }
 
     public function showAdvantageeName(): string
