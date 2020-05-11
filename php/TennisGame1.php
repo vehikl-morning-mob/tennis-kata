@@ -3,9 +3,6 @@
 class TennisGame1 implements TennisGame
 {
     private const MAX_TOTAL = 4;
-    private const LOVE_ALL = "Love-All";
-    private const FIFTEEN_ALL = "Fifteen-All";
-    private const THIRTY_ALL = "Thirty-All";
     private const DEUCE = "Deuce";
     private const LOVE = "Love";
     private const FIFTEEN = "Fifteen";
@@ -17,6 +14,7 @@ class TennisGame1 implements TennisGame
     private const WIN_FOR_PLAYER_2 = "Win for player2";
     private const PLAYER_1_NAME = 'player1';
     private const WINNING_DIFF = 2;
+    private const STRINGIFIED_SCORES = [self::LOVE, self::FIFTEEN, self::THIRTY, self::FORTY];
     private $player1NumericalScore = 0;
     private $player2NumericalScore = 0;
     private $player1Name = '';
@@ -50,29 +48,17 @@ class TennisGame1 implements TennisGame
 
     public function stringifyScoreForUntiedGame(): string
     {
-        $stringifiedScores = [self::LOVE, self::FIFTEEN, self::THIRTY, self::FORTY,];
-        $player1StringifiedScore = $stringifiedScores[$this->player1NumericalScore];
-        $player2StringifiedScore = $stringifiedScores[$this->player2NumericalScore];
-        return $player1StringifiedScore.'-'.$player2StringifiedScore;
+        $player1StringifiedScore = self::STRINGIFIED_SCORES[$this->player1NumericalScore];
+        $player2StringifiedScore = self::STRINGIFIED_SCORES[$this->player2NumericalScore];
+        return $player1StringifiedScore . '-' . $player2StringifiedScore;
     }
 
     public function stringifyScoreForTiedGame(): string
     {
-        switch ($this->player1NumericalScore) {
-            case 0:
-                $score = self::LOVE_ALL;
-                break;
-            case 1:
-                $score = self::FIFTEEN_ALL;
-                break;
-            case 2:
-                $score = self::THIRTY_ALL;
-                break;
-            default:
-                $score = self::DEUCE;
-                break;
+        if ($this->player1NumericalScore > 2) {
+            return self::DEUCE;
         }
-        return $score;
+        return self::STRINGIFIED_SCORES[$this->player1NumericalScore] . "-All";
     }
 
     public function isWinPlayer1(): bool
