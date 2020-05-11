@@ -3,10 +3,11 @@
 class TennisGame1 implements TennisGame
 {
     private const MAX_TOTAL = 4;
-    private const DEUCE = "Deuce";
     private const PLAYER_1_NAME = 'player1';
     private const WINNING_DIFF = 2;
+    private const ADVANTAGE_DIFF = 1;
     private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
+    private const DEUCE = "Deuce";
     private const TIED_SCORE_SUFFIX = "-All";
     private $player1NumericalScore = 0;
     private $player2NumericalScore = 0;
@@ -76,7 +77,7 @@ class TennisGame1 implements TennisGame
 
     public function showAdvantageeName(): string
     {
-        if ($this->getDeltaScore() != 1) {
+        if ($this->getDeltaScore() != self::ADVANTAGE_DIFF) {
             return '';
         }
 
