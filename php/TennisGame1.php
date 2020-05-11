@@ -17,13 +17,13 @@ class TennisGame1 implements TennisGame
     private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
     private const DEUCE = "Deuce";
     private const TIED_SCORE_SUFFIX = "-All";
-    private $player1NumericalScore = 0;
-    private $player2NumericalScore = 0;
+    private int $player1NumericalScore = 0;
+    private int $player2NumericalScore = 0;
 
     private Player $player1;
     private Player $player2;
 
-    public function __construct($player1Name, $player2Name)
+    public function __construct(string $player1Name, string $player2Name)
     {
         $this->player1 = new Player($player1Name);
         $this->player2 = new Player($player2Name);
