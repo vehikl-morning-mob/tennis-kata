@@ -10,8 +10,8 @@ class TennisGame1 implements TennisGame
     private const TIED_SCORE_SUFFIX = "-All";
     private $player1NumericalScore = 0;
     private $player2NumericalScore = 0;
-    private $player1Name = '';
-    private $player2Name = '';
+    private $player1Name;
+    private $player2Name;
 
     public function __construct($player1Name, $player2Name)
     {
@@ -56,7 +56,7 @@ class TennisGame1 implements TennisGame
 
     public function isWinPlayer1(): bool
     {
-        return $this->getDeltaScore() >= self::WINNING_DIFF && $this->player1NumericalScore > $this->player2NumericalScore;
+        return $this->isPlayer1Ahead() && $this->getDeltaScore() >= self::WINNING_DIFF;
     }
 
     public function isAtLeastOnePlayerAboveTheMaxScore(): bool
@@ -81,8 +81,12 @@ class TennisGame1 implements TennisGame
             return '';
         }
 
-        $advantageeName = $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
-        return 'Advantage ' . $advantageeName;
+        return 'Advantage ' . ($this->isPlayer1Ahead() ? $this->player1Name : $this->player2Name);
+    }
+
+    public function isPlayer1Ahead(): bool
+    {
+        return $this->player1NumericalScore > $this->player2NumericalScore;
     }
 }
 
