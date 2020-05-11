@@ -4,10 +4,6 @@ class TennisGame1 implements TennisGame
 {
     private const MAX_TOTAL = 4;
     private const DEUCE = "Deuce";
-    private const ADVANTAGE_PLAYER_1 = "Advantage player1";
-    private const ADVANTAGE_PLAYER_2 = "Advantage player2";
-    private const WIN_FOR_PLAYER_1 = "Win for player1";
-    private const WIN_FOR_PLAYER_2 = "Win for player2";
     private const PLAYER_1_NAME = 'player1';
     private const WINNING_DIFF = 2;
     private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
@@ -75,18 +71,19 @@ class TennisGame1 implements TennisGame
 
     public function showWinnerName(): string
     {
-        return $this->isWinPlayer1() ? self::WIN_FOR_PLAYER_1 : self::WIN_FOR_PLAYER_2;
+        return 'Win for '.($this->isWinPlayer1() ? $this->player1Name : $this->player2Name);
     }
 
     public function showAdvantageeName(): string
     {
+        $advantageeName = 'no one';
         if ($this->getDeltaScore() == 1) {
-            return self::ADVANTAGE_PLAYER_1;
+            $advantageeName = $this->player1Name;
         }
         if ($this->getDeltaScore() == -1) {
-            return self::ADVANTAGE_PLAYER_2;
+            $advantageeName = $this->player2Name;
         }
-        return '';
+        return 'Advantage '.$advantageeName;
     }
 }
 
