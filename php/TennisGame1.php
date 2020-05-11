@@ -16,6 +16,7 @@ class TennisGame1 implements TennisGame
     private const WIN_FOR_PLAYER_1 = "Win for player1";
     private const WIN_FOR_PLAYER_2 = "Win for player2";
     private const PLAYER_1_NAME = 'player1';
+    private const WINNING_DIFF = 2;
     private $player1NumericalScore = 0;
     private $player2NumericalScore = 0;
     private $player1Name = '';
@@ -42,7 +43,7 @@ class TennisGame1 implements TennisGame
         if ($this->player1NumericalScore == $this->player2NumericalScore) {
             $score = $this->stringifyScoreForTiedGame();
         } elseif ($this->isAtLeastOnePlayerAboveTheMaxScore()) {
-            $score = abs($this->getDeltaScore()) >= 2 ? $this->showWinnerName() : $this->showAdvantageeName();
+            $score = abs($this->getDeltaScore()) >= self::WINNING_DIFF ? $this->showWinnerName() : $this->showAdvantageeName();
         } else {
             $score = $this->stringifyScoreForUntiedGame($score);
         }
@@ -78,7 +79,7 @@ class TennisGame1 implements TennisGame
 
     public function isWinPlayer1(): bool
     {
-        return $this->getDeltaScore() >= 2;
+        return $this->getDeltaScore() >= self::WINNING_DIFF;
     }
 
     public function isAtLeastOnePlayerAboveTheMaxScore(): bool
