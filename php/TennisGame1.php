@@ -2,7 +2,6 @@
 
 class TennisGame1 implements TennisGame
 {
-    private const MAX_TOTAL = 4;
     private const PLAYER_1_NAME = 'player1';
     private const WINNING_DIFF = 2;
     private const ADVANTAGE_DIFF = 1;
@@ -62,7 +61,8 @@ class TennisGame1 implements TennisGame
 
     public function isAtLeastOnePlayerAboveTheMaxScore(): bool
     {
-        return $this->player1NumericalScore >= self::MAX_TOTAL || $this->player2NumericalScore >= self::MAX_TOTAL;
+        return $this->player1NumericalScore >= count(self::STRINGIFIED_SCORES)
+            || $this->player2NumericalScore >= count(self::STRINGIFIED_SCORES);
     }
 
     public function getDeltaScore(): int
@@ -72,7 +72,7 @@ class TennisGame1 implements TennisGame
 
     public function showWinnerName(): string
     {
-        return 'Win for '.($this->isWinPlayer1() ? $this->player1Name : $this->player2Name);
+        return 'Win for ' . ($this->isWinPlayer1() ? $this->player1Name : $this->player2Name);
     }
 
     public function showAdvantageeName(): string
@@ -81,8 +81,8 @@ class TennisGame1 implements TennisGame
             return '';
         }
 
-        $advantageeName =  $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
-        return 'Advantage '.$advantageeName;
+        $advantageeName = $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
+        return 'Advantage ' . $advantageeName;
     }
 }
 
