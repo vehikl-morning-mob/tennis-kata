@@ -4,17 +4,14 @@ class TennisGame1 implements TennisGame
 {
     private const MAX_TOTAL = 4;
     private const DEUCE = "Deuce";
-    private const LOVE = "Love";
-    private const FIFTEEN = "Fifteen";
-    private const THIRTY = "Thirty";
-    private const FORTY = "Forty";
     private const ADVANTAGE_PLAYER_1 = "Advantage player1";
     private const ADVANTAGE_PLAYER_2 = "Advantage player2";
     private const WIN_FOR_PLAYER_1 = "Win for player1";
     private const WIN_FOR_PLAYER_2 = "Win for player2";
     private const PLAYER_1_NAME = 'player1';
     private const WINNING_DIFF = 2;
-    private const STRINGIFIED_SCORES = [self::LOVE, self::FIFTEEN, self::THIRTY, self::FORTY];
+    private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
+    private const TIED_SCORE_SUFFIX = "-All";
     private $player1NumericalScore = 0;
     private $player2NumericalScore = 0;
     private $player1Name = '';
@@ -58,7 +55,7 @@ class TennisGame1 implements TennisGame
         if ($this->player1NumericalScore > 2) {
             return self::DEUCE;
         }
-        return self::STRINGIFIED_SCORES[$this->player1NumericalScore] . "-All";
+        return self::STRINGIFIED_SCORES[$this->player1NumericalScore] . self::TIED_SCORE_SUFFIX;
     }
 
     public function isWinPlayer1(): bool
