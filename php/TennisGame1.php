@@ -98,11 +98,12 @@ class TennisGame1 implements TennisGame
     public function showAdvantageeName(): string
     {
         if ($this->getDeltaScore() == 1) {
-            $score = self::ADVANTAGE_PLAYER_1;
-        } elseif ($this->getDeltaScore() == -1) {
-            $score = self::ADVANTAGE_PLAYER_2;
+            return self::ADVANTAGE_PLAYER_1;
         }
-        return $score;
+        if ($this->getDeltaScore() == -1) {
+            return self::ADVANTAGE_PLAYER_2;
+        }
+        return '';
     }
 }
 
