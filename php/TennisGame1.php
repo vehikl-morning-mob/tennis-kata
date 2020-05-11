@@ -54,11 +54,6 @@ class TennisGame1 implements TennisGame
         return self::STRINGIFIED_SCORES[$this->player1NumericalScore] . self::TIED_SCORE_SUFFIX;
     }
 
-    public function isWinPlayer1(): bool
-    {
-        return $this->isPlayer1Ahead() && $this->getDeltaScore() >= self::WINNING_DIFF;
-    }
-
     public function hasSomeoneReachedFortyPoints(): bool
     {
         return $this->player1NumericalScore >= count(self::STRINGIFIED_SCORES)
@@ -72,7 +67,7 @@ class TennisGame1 implements TennisGame
 
     public function showWinnerName(): string
     {
-        return 'Win for ' . ($this->isWinPlayer1() ? $this->player1Name : $this->player2Name);
+        return 'Win for ' . $this->getLeadingPlayerName();
     }
 
     public function showAdvantageeName(): string
@@ -81,12 +76,12 @@ class TennisGame1 implements TennisGame
             return '';
         }
 
-        return 'Advantage ' . ($this->isPlayer1Ahead() ? $this->player1Name : $this->player2Name);
+        return 'Advantage ' . $this->getLeadingPlayerName();
     }
 
-    public function isPlayer1Ahead(): bool
+    public function getLeadingPlayerName()
     {
-        return $this->player1NumericalScore > $this->player2NumericalScore;
+        return $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
     }
 }
 
