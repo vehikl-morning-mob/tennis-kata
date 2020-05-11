@@ -34,7 +34,8 @@ class TennisGame1 implements TennisGame
             return $this->stringifyScoreForTiedGame();
         }
         if ($this->hasSomeoneReachedFortyPoints()) {
-            return $this->getDeltaScore() >= self::WINNING_DIFF ? $this->showWinnerName() : $this->showAdvantageeName();
+            $prefix = $this->getDeltaScore() >= self::WINNING_DIFF ? 'Win for' : 'Advantage';
+            return "{$prefix} {$this->getLeadingPlayerName()}";
         }
         return $this->stringifyScoreForUntiedGame();
     }
@@ -63,20 +64,6 @@ class TennisGame1 implements TennisGame
     public function getDeltaScore(): int
     {
         return abs($this->player1NumericalScore - $this->player2NumericalScore);
-    }
-
-    public function showWinnerName(): string
-    {
-        return 'Win for ' . $this->getLeadingPlayerName();
-    }
-
-    public function showAdvantageeName(): string
-    {
-        if ($this->getDeltaScore() != self::ADVANTAGE_DIFF) {
-            return '';
-        }
-
-        return 'Advantage ' . $this->getLeadingPlayerName();
     }
 
     public function getLeadingPlayerName()
