@@ -41,11 +41,11 @@ class TennisGame1 implements TennisGame
     {
         if ($this->player1NumericalScore == $this->player2NumericalScore) {
             return $this->stringifyScoreForTiedGame();
-        } elseif ($this->isAtLeastOnePlayerAboveTheMaxScore()) {
-            return abs($this->getDeltaScore()) >= self::WINNING_DIFF ? $this->showWinnerName() : $this->showAdvantageeName();
-        } else {
-            return $this->stringifyScoreForUntiedGame();
         }
+        if ($this->isAtLeastOnePlayerAboveTheMaxScore()) {
+            return abs($this->getDeltaScore()) >= self::WINNING_DIFF ? $this->showWinnerName() : $this->showAdvantageeName();
+        }
+        return $this->stringifyScoreForUntiedGame();
     }
 
     public function stringifyScoreForUntiedGame(): string
