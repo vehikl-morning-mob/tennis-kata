@@ -1,22 +1,32 @@
 <?php
 
+class Player
+{
+    public $name;
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
+}
+
 class TennisGame1 implements TennisGame
 {
     private const PLAYER_1_NAME = 'player1';
     private const WINNING_DIFF = 2;
-    private const ADVANTAGE_DIFF = 1;
     private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
     private const DEUCE = "Deuce";
     private const TIED_SCORE_SUFFIX = "-All";
     private $player1NumericalScore = 0;
     private $player2NumericalScore = 0;
-    private $player1Name;
-    private $player2Name;
+
+    private Player $player1;
+    private Player $player2;
 
     public function __construct($player1Name, $player2Name)
     {
-        $this->player1Name = $player1Name;
-        $this->player2Name = $player2Name;
+        $this->player1 = new Player($player1Name);
+        $this->player2 = new Player($player2Name);
     }
 
     public function wonPoint($playerName)
@@ -68,7 +78,6 @@ class TennisGame1 implements TennisGame
 
     public function getLeadingPlayerName()
     {
-        return $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
+        return $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1->name : $this->player2->name;
     }
 }
-
