@@ -12,6 +12,7 @@ class TennisGame2 implements TennisGame
     private const FIFTEEN = "Fifteen";
     private const THIRTY = "Thirty";
     private const FORTY = "Forty";
+    private const DELTA_SCORE_TO_WIN = 2;
     private $player1NumericalScore = 0;
     private $player2NumericalScore = 0;
 
@@ -97,12 +98,16 @@ class TennisGame2 implements TennisGame
 
     public function isWinningPlayer1(): bool
     {
-        return $this->player1NumericalScore >= self::MAX_SCORE && $this->player2NumericalScore >= self::LOVE_SCORE && ($this->player1NumericalScore - $this->player2NumericalScore) >= self::THIRTY_SCORE;
+        return $this->player1NumericalScore >= self::MAX_SCORE
+            && $this->player2NumericalScore >= self::LOVE_SCORE
+            && ($this->player1NumericalScore - $this->player2NumericalScore) >= self::DELTA_SCORE_TO_WIN;
     }
 
     public function isWinningPlayer2(): bool
     {
-        return $this->player2NumericalScore >= self::MAX_SCORE && $this->player1NumericalScore >= self::LOVE_SCORE && ($this->player2NumericalScore - $this->player1NumericalScore) >= self::THIRTY_SCORE;
+        return $this->player2NumericalScore >= self::MAX_SCORE
+            && $this->player1NumericalScore >= self::LOVE_SCORE
+            && ($this->player2NumericalScore - $this->player1NumericalScore) >= self::DELTA_SCORE_TO_WIN;
     }
 
     /**
