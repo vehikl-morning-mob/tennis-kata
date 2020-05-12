@@ -61,7 +61,7 @@ class TennisGame1 implements TennisGame
 
     public function stringifyScoreForTiedGame(): string
     {
-        if ($this->player1->score > 2) {
+        if ($this->hasSomeoneReachedFortyPoints()) {
             return self::DEUCE;
         }
         return $this->player1->getScoreAsString() . self::TIED_SCORE_SUFFIX;
