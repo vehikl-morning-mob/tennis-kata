@@ -44,11 +44,11 @@ class TennisGame2 implements TennisGame
             return "Win for player2";
         }
 
-        if ($this->player1NumericalScore > $this->player2NumericalScore && $this->player2NumericalScore >= self::FORTY_SCORE) {
+        if ($this->isAdvantagePlayer1()) {
             return "Advantage player1";
         }
 
-        if ($this->player2NumericalScore > $this->player1NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE) {
+        if ($this->isAdvantagePlayer2()) {
             return "Advantage player2";
         }
 
@@ -119,5 +119,15 @@ class TennisGame2 implements TennisGame
     public function isAll(): bool
     {
         return $this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE;
+    }
+
+    public function isAdvantagePlayer1(): bool
+    {
+        return $this->player1NumericalScore > $this->player2NumericalScore && $this->player2NumericalScore >= self::FORTY_SCORE;
+    }
+
+    public function isAdvantagePlayer2(): bool
+    {
+        return $this->player2NumericalScore > $this->player1NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE;
     }
 }
