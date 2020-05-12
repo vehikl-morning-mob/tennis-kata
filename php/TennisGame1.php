@@ -16,9 +16,9 @@ class Player
         return self::STRINGIFIED_SCORES[$this->score];
     }
 
-    public function hasReachedFortyPoints(): bool
+    public function hasReachedPoints(int $points): bool
     {
-        return $this->score >= count(self::STRINGIFIED_SCORES) - 1;
+        return $this->score >= $points;
     }
 }
 
@@ -52,7 +52,7 @@ class TennisGame1 implements TennisGame
         if ($this->player1->score == $this->player2->score) {
             return $this->stringifyScoreForTiedGame();
         }
-        if ($this->player1->score > 3 || $this->player2->score > 3) {
+        if ($this->hasSomeoneReached(4)) {
             $prefix = $this->getDeltaScore() >= self::WINNING_DIFF ? 'Win for' : 'Advantage';
             return "{$prefix} {$this->getLeadingPlayerName()}";
         }
@@ -61,15 +61,15 @@ class TennisGame1 implements TennisGame
 
     public function stringifyScoreForTiedGame(): string
     {
-        if ($this->hasSomeoneReachedFortyPoints()) {
+        if ($this->hasSomeoneReached(3)) {
             return self::DEUCE;
         }
         return $this->player1->getScoreAsString() . self::TIED_SCORE_SUFFIX;
     }
 
-    public function hasSomeoneReachedFortyPoints(): bool
+    public function hasSomeoneReached(int $points): bool
     {
-        return $this->player1->hasReachedFortyPoints() || $this->player2->hasReachedFortyPoints();
+        return $this->player1->hasReachedPoints($points) || $this->player2->hasReachedPoints($points);
     }
 
     public function getDeltaScore(): int
