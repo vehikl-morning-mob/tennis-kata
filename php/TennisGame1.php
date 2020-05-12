@@ -25,9 +25,11 @@ class Player
 class TennisGame1 implements TennisGame
 {
     private const PLAYER_1_NAME = 'player1';
-    private const WINNING_DIFF = 2;
     private const DEUCE = "Deuce";
     private const TIED_SCORE_SUFFIX = "-All";
+    private const WINNING_DIFF = 2;
+    private const FORTY = 3;
+    private const OVER_FORTY = 4;
 
     private Player $player1;
     private Player $player2;
@@ -52,7 +54,7 @@ class TennisGame1 implements TennisGame
         if ($this->player1->score == $this->player2->score) {
             return $this->stringifyScoreForTiedGame();
         }
-        if ($this->hasSomeoneReached(4)) {
+        if ($this->hasSomeoneReached(self::OVER_FORTY)) {
             $prefix = $this->getDeltaScore() >= self::WINNING_DIFF ? 'Win for' : 'Advantage';
             return "{$prefix} {$this->getLeadingPlayerName()}";
         }
@@ -61,7 +63,7 @@ class TennisGame1 implements TennisGame
 
     public function stringifyScoreForTiedGame(): string
     {
-        if ($this->hasSomeoneReached(3)) {
+        if ($this->hasSomeoneReached(self::FORTY)) {
             return self::DEUCE;
         }
         return $this->player1->getScoreAsString() . self::TIED_SCORE_SUFFIX;
