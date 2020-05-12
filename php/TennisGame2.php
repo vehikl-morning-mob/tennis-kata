@@ -7,6 +7,11 @@ class TennisGame2 implements TennisGame
     private const THIRTY_SCORE = 2;
     private const FORTY_SCORE = 3;
     private const FIFTEEN_SCORE = 1;
+    private const DEUCE = "Deuce";
+    private const LOVE = "Love";
+    private const FIFTEEN = "Fifteen";
+    private const THIRTY = "Thirty";
+    private const FORTY = "Forty";
     private $player1NumericalScore = 0;
     private $player2NumericalScore = 0;
 
@@ -24,7 +29,7 @@ class TennisGame2 implements TennisGame
     public function getScore()
     {
         if ($this->isDeuce()) {
-            return "Deuce";
+            return self::DEUCE;
         }
 
         if ($this->isAll()) {
@@ -52,12 +57,12 @@ class TennisGame2 implements TennisGame
         return "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
     }
 
-    private function P1Score()
+    private function increasePlayer1Score()
     {
         $this->player1NumericalScore++;
     }
 
-    private function P2Score()
+    private function increasePlayer2Score()
     {
         $this->player2NumericalScore++;
     }
@@ -65,9 +70,9 @@ class TennisGame2 implements TennisGame
     public function wonPoint($player)
     {
         if ($player == "player1") {
-            $this->P1Score();
+            $this->increasePlayer1Score();
         } else {
-            $this->P2Score();
+            $this->increasePlayer2Score();
         }
     }
 
@@ -75,17 +80,17 @@ class TennisGame2 implements TennisGame
     {
         $score = "";
         if ($numericalScore == self::LOVE_SCORE) {
-            $score = "Love";
+            $score = self::LOVE;
         }
         if ($numericalScore == self::FIFTEEN_SCORE) {
-            $score = "Fifteen";
+            $score = self::FIFTEEN;
         }
         if ($numericalScore == self::THIRTY_SCORE) {
-            $score = "Thirty";
+            $score = self::THIRTY;
         }
 
         if ($numericalScore == self::FORTY_SCORE) {
-            $score = "Forty";
+            $score = self::FORTY;
         }
         return $score;
     }
