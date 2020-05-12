@@ -7,11 +7,11 @@ class TennisGame2 implements TennisGame
     private const THIRTY_SCORE = 2;
     private const FORTY_SCORE = 3;
     private const FIFTEEN_SCORE = 1;
-    private $P1point = 0;
-    private $P2point = 0;
+    private $player1NumericalScore = 0;
+    private $player2NumericalScore = 0;
 
-    private $P1res = "";
-    private $P2res = "";
+    private $player1StringifiedScore = "";
+    private $player2StringifiedScore = "";
     private $player1Name = "";
     private $player2Name = "";
 
@@ -24,97 +24,97 @@ class TennisGame2 implements TennisGame
     public function getScore()
     {
         $score = "";
-        if ($this->P1point == $this->P2point && $this->P1point < self::MAX_SCORE) {
-            if ($this->P1point == self::LOVE_SCORE) {
+        if ($this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE) {
+            if ($this->player1NumericalScore == self::LOVE_SCORE) {
                 $score = "Love";
             }
-            if ($this->P1point == self::FIFTEEN_SCORE) {
+            if ($this->player1NumericalScore == self::FIFTEEN_SCORE) {
                 $score = "Fifteen";
             }
-            if ($this->P1point == self::THIRTY_SCORE) {
+            if ($this->player1NumericalScore == self::THIRTY_SCORE) {
                 $score = "Thirty";
             }
             $score .= "-All";
         }
 
-        if ($this->P1point == $this->P2point && $this->P1point >= self::FORTY_SCORE) {
+        if ($this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE) {
             $score = "Deuce";
         }
 
-        if ($this->P1point > self::LOVE_SCORE && $this->P2point == self::LOVE_SCORE) {
-            if ($this->P1point == self::FIFTEEN_SCORE) {
-                $this->P1res = "Fifteen";
+        if ($this->player1NumericalScore > self::LOVE_SCORE && $this->player2NumericalScore == self::LOVE_SCORE) {
+            if ($this->player1NumericalScore == self::FIFTEEN_SCORE) {
+                $this->player1StringifiedScore = "Fifteen";
             }
-            if ($this->P1point == self::THIRTY_SCORE) {
-                $this->P1res = "Thirty";
+            if ($this->player1NumericalScore == self::THIRTY_SCORE) {
+                $this->player1StringifiedScore = "Thirty";
             }
-            if ($this->P1point == self::FORTY_SCORE) {
-                $this->P1res = "Forty";
+            if ($this->player1NumericalScore == self::FORTY_SCORE) {
+                $this->player1StringifiedScore = "Forty";
             }
 
-            $this->P2res = "Love";
-            $score = "{$this->P1res}-{$this->P2res}";
+            $this->player2StringifiedScore = "Love";
+            $score = "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
         }
 
-        if ($this->P2point > self::LOVE_SCORE && $this->P1point == self::LOVE_SCORE) {
-            if ($this->P2point == self::FIFTEEN_SCORE) {
-                $this->P2res = "Fifteen";
+        if ($this->player2NumericalScore > self::LOVE_SCORE && $this->player1NumericalScore == self::LOVE_SCORE) {
+            if ($this->player2NumericalScore == self::FIFTEEN_SCORE) {
+                $this->player2StringifiedScore = "Fifteen";
             }
-            if ($this->P2point == self::THIRTY_SCORE) {
-                $this->P2res = "Thirty";
+            if ($this->player2NumericalScore == self::THIRTY_SCORE) {
+                $this->player2StringifiedScore = "Thirty";
             }
-            if ($this->P2point == self::FORTY_SCORE) {
-                $this->P2res = "Forty";
+            if ($this->player2NumericalScore == self::FORTY_SCORE) {
+                $this->player2StringifiedScore = "Forty";
             }
-            $this->P1res = "Love";
-            $score = "{$this->P1res}-{$this->P2res}";
+            $this->player1StringifiedScore = "Love";
+            $score = "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
         }
 
-        if ($this->P1point > $this->P2point && $this->P1point < self::MAX_SCORE) {
-            if ($this->P1point == self::THIRTY_SCORE) {
-                $this->P1res = "Thirty";
+        if ($this->player1NumericalScore > $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE) {
+            if ($this->player1NumericalScore == self::THIRTY_SCORE) {
+                $this->player1StringifiedScore = "Thirty";
             }
-            if ($this->P1point == self::FORTY_SCORE) {
-                $this->P1res = "Forty";
+            if ($this->player1NumericalScore == self::FORTY_SCORE) {
+                $this->player1StringifiedScore = "Forty";
             }
-            if ($this->P2point == self::FIFTEEN_SCORE) {
-                $this->P2res = "Fifteen";
+            if ($this->player2NumericalScore == self::FIFTEEN_SCORE) {
+                $this->player2StringifiedScore = "Fifteen";
             }
-            if ($this->P2point == self::THIRTY_SCORE) {
-                $this->P2res = "Thirty";
+            if ($this->player2NumericalScore == self::THIRTY_SCORE) {
+                $this->player2StringifiedScore = "Thirty";
             }
-            $score = "{$this->P1res}-{$this->P2res}";
+            $score = "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
         }
 
-        if ($this->P2point > $this->P1point && $this->P2point < self::MAX_SCORE) {
-            if ($this->P2point == self::THIRTY_SCORE) {
-                $this->P2res = "Thirty";
+        if ($this->player2NumericalScore > $this->player1NumericalScore && $this->player2NumericalScore < self::MAX_SCORE) {
+            if ($this->player2NumericalScore == self::THIRTY_SCORE) {
+                $this->player2StringifiedScore = "Thirty";
             }
-            if ($this->P2point == self::FORTY_SCORE) {
-                $this->P2res = "Forty";
+            if ($this->player2NumericalScore == self::FORTY_SCORE) {
+                $this->player2StringifiedScore = "Forty";
             }
-            if ($this->P1point == self::FIFTEEN_SCORE) {
-                $this->P1res = "Fifteen";
+            if ($this->player1NumericalScore == self::FIFTEEN_SCORE) {
+                $this->player1StringifiedScore = "Fifteen";
             }
-            if ($this->P1point == self::THIRTY_SCORE) {
-                $this->P1res = "Thirty";
+            if ($this->player1NumericalScore == self::THIRTY_SCORE) {
+                $this->player1StringifiedScore = "Thirty";
             }
-            $score = "{$this->P1res}-{$this->P2res}";
+            $score = "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
         }
 
-        if ($this->P1point > $this->P2point && $this->P2point >= self::FORTY_SCORE) {
+        if ($this->player1NumericalScore > $this->player2NumericalScore && $this->player2NumericalScore >= self::FORTY_SCORE) {
             $score = "Advantage player1";
         }
 
-        if ($this->P2point > $this->P1point && $this->P1point >= self::FORTY_SCORE) {
+        if ($this->player2NumericalScore > $this->player1NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE) {
             $score = "Advantage player2";
         }
 
-        if ($this->P1point >= self::MAX_SCORE && $this->P2point >= self::LOVE_SCORE && ($this->P1point - $this->P2point) >= self::THIRTY_SCORE) {
+        if ($this->player1NumericalScore >= self::MAX_SCORE && $this->player2NumericalScore >= self::LOVE_SCORE && ($this->player1NumericalScore - $this->player2NumericalScore) >= self::THIRTY_SCORE) {
             $score = "Win for player1";
         }
 
-        if ($this->P2point >= self::MAX_SCORE && $this->P1point >= self::LOVE_SCORE && ($this->P2point - $this->P1point) >= self::THIRTY_SCORE) {
+        if ($this->player2NumericalScore >= self::MAX_SCORE && $this->player1NumericalScore >= self::LOVE_SCORE && ($this->player2NumericalScore - $this->player1NumericalScore) >= self::THIRTY_SCORE) {
             $score = "Win for player2";
         }
 
@@ -137,12 +137,12 @@ class TennisGame2 implements TennisGame
 
     private function P1Score()
     {
-        $this->P1point++;
+        $this->player1NumericalScore++;
     }
 
     private function P2Score()
     {
-        $this->P2point++;
+        $this->player2NumericalScore++;
     }
 
     public function wonPoint($player)
