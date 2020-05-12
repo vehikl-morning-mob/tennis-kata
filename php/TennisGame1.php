@@ -18,7 +18,7 @@ class Player
 
     public function hasReachedFortyPoints(): bool
     {
-        return $this->score >= count(self::STRINGIFIED_SCORES);
+        return $this->score >= count(self::STRINGIFIED_SCORES) - 1;
     }
 }
 
@@ -52,7 +52,7 @@ class TennisGame1 implements TennisGame
         if ($this->player1->score == $this->player2->score) {
             return $this->stringifyScoreForTiedGame();
         }
-        if ($this->hasSomeoneReachedFortyPoints()) {
+        if ($this->player1->score > 3 || $this->player2->score > 3) {
             $prefix = $this->getDeltaScore() >= self::WINNING_DIFF ? 'Win for' : 'Advantage';
             return "{$prefix} {$this->getLeadingPlayerName()}";
         }
