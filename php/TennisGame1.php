@@ -27,7 +27,6 @@ class TennisGame1 implements TennisGame
 {
     private const PLAYER_1_NAME = 'player1';
     private const WINNING_DIFF = 2;
-    private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
     private const DEUCE = "Deuce";
     private const TIED_SCORE_SUFFIX = "-All";
 
