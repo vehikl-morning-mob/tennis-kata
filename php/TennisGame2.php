@@ -31,11 +31,11 @@ class TennisGame2 implements TennisGame
             return $this->getStringifiedScore($this->player1NumericalScore) . "-All";
         }
 
-        if ($this->player1NumericalScore >= self::MAX_SCORE && $this->player2NumericalScore >= self::LOVE_SCORE && ($this->player1NumericalScore - $this->player2NumericalScore) >= self::THIRTY_SCORE) {
+        if ($this->isWinningPlayer1()) {
             return "Win for player1";
         }
 
-        if ($this->player2NumericalScore >= self::MAX_SCORE && $this->player1NumericalScore >= self::LOVE_SCORE && ($this->player2NumericalScore - $this->player1NumericalScore) >= self::THIRTY_SCORE) {
+        if ($this->isWinningPlayer2()) {
             return "Win for player2";
         }
 
@@ -88,5 +88,15 @@ class TennisGame2 implements TennisGame
             $score = "Forty";
         }
         return $score;
+    }
+
+    public function isWinningPlayer1(): bool
+    {
+        return $this->player1NumericalScore >= self::MAX_SCORE && $this->player2NumericalScore >= self::LOVE_SCORE && ($this->player1NumericalScore - $this->player2NumericalScore) >= self::THIRTY_SCORE;
+    }
+
+    public function isWinningPlayer2(): bool
+    {
+        return $this->player2NumericalScore >= self::MAX_SCORE && $this->player1NumericalScore >= self::LOVE_SCORE && ($this->player2NumericalScore - $this->player1NumericalScore) >= self::THIRTY_SCORE;
     }
 }
