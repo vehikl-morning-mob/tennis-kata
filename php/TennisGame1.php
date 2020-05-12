@@ -4,11 +4,17 @@ class Player
 {
     public $name;
     public $score;
+    private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
 
-    public function __construct(string $name, int $score = 0 )
+    public function __construct(string $name, int $score = 0)
     {
         $this->name = $name;
         $this->score = $score;
+    }
+
+    public function getScoreAsString(): string
+    {
+        return self::STRINGIFIED_SCORES[$this->score];
     }
 }
 
@@ -52,9 +58,7 @@ class TennisGame1 implements TennisGame
 
     public function stringifyScoreForUntiedGame(): string
     {
-        $player1StringifiedScore = self::STRINGIFIED_SCORES[$this->player1->score];
-        $player2StringifiedScore = self::STRINGIFIED_SCORES[$this->player2->score];
-        return $player1StringifiedScore . '-' . $player2StringifiedScore;
+        return $this->player1->getScoreAsString() . '-' . $this->player2->getScoreAsString();
     }
 
     public function stringifyScoreForTiedGame(): string
@@ -62,7 +66,7 @@ class TennisGame1 implements TennisGame
         if ($this->player1->score > 2) {
             return self::DEUCE;
         }
-        return self::STRINGIFIED_SCORES[$this->player1->score] . self::TIED_SCORE_SUFFIX;
+        return $this->player1->getScoreAsString() . self::TIED_SCORE_SUFFIX;
     }
 
     public function hasSomeoneReachedFortyPoints(): bool
