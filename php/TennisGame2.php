@@ -38,13 +38,7 @@ class TennisGame2 implements TennisGame
         }
 
         if ($this->isGameOver()) {
-            if ($this->isWinningPlayer1()) {
-                return "Win for player1";
-            }
-
-            if ($this->isWinningPlayer2()) {
-                return "Win for player2";
-            }
+            return "Win for " . $this->getWinner();
         }
 
         if ($this->isAdvantagePlayer1()) {
@@ -104,29 +98,11 @@ class TennisGame2 implements TennisGame
             && abs($this->player1NumericalScore - $this->player2NumericalScore) >= self::DELTA_SCORE_TO_WIN;
     }
 
-    public function isWinningPlayer1(): bool
-    {
-        return $this->player1NumericalScore >= self::MAX_SCORE
-            && ($this->player1NumericalScore - $this->player2NumericalScore) >= self::DELTA_SCORE_TO_WIN;
-    }
-
-    public function isWinningPlayer2(): bool
-    {
-        return $this->player2NumericalScore >= self::MAX_SCORE
-            && ($this->player2NumericalScore - $this->player1NumericalScore) >= self::DELTA_SCORE_TO_WIN;
-    }
-
-    /**
-     * @return bool
-     */
     public function isDeuce(): bool
     {
         return $this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE;
     }
 
-    /**
-     * @return bool
-     */
     public function isAll(): bool
     {
         return $this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE;
@@ -140,5 +116,10 @@ class TennisGame2 implements TennisGame
     public function isAdvantagePlayer2(): bool
     {
         return $this->player2NumericalScore > $this->player1NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE;
+    }
+
+    private function getWinner()
+    {
+        return $this->player1NumericalScore >= $this->player2NumericalScore ? "player1" : "player2";
     }
 }
