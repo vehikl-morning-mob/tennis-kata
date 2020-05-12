@@ -56,11 +56,6 @@ class TennisGame1 implements TennisGame
             $prefix = $this->getDeltaScore() >= self::WINNING_DIFF ? 'Win for' : 'Advantage';
             return "{$prefix} {$this->getLeadingPlayerName()}";
         }
-        return $this->stringifyScoreForUntiedGame();
-    }
-
-    public function stringifyScoreForUntiedGame(): string
-    {
         return $this->player1->getScoreAsString() . '-' . $this->player2->getScoreAsString();
     }
 
