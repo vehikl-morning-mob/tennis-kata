@@ -25,7 +25,7 @@ class TennisGame2 implements TennisGame
     {
         $score = "";
         if ($this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE) {
-            $score = $this->getStringifiedScore();
+            $score = $this->getStringifiedScore($this->player1NumericalScore);
             $score .= "-All";
         }
 
@@ -34,7 +34,7 @@ class TennisGame2 implements TennisGame
         }
 
         if ($this->player1NumericalScore > self::LOVE_SCORE && $this->player2NumericalScore == self::LOVE_SCORE) {
-            $this->player1StringifiedScore = $this->getStringifiedScore();
+            $this->player1StringifiedScore = $this->getStringifiedScore($this->player1NumericalScore);
             $this->player2StringifiedScore = "Love";
             $score = "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
         }
@@ -54,7 +54,7 @@ class TennisGame2 implements TennisGame
         }
 
         if ($this->player1NumericalScore > $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE) {
-            $this->player1StringifiedScore = $this->getStringifiedScore();
+            $this->player1StringifiedScore = $this->getStringifiedScore($this->player1NumericalScore);
             if ($this->player2NumericalScore == self::FIFTEEN_SCORE) {
                 $this->player2StringifiedScore = "Fifteen";
             }
@@ -118,20 +118,20 @@ class TennisGame2 implements TennisGame
         }
     }
 
-    public function getStringifiedScore(): string
+    public function getStringifiedScore(int $numericalScore): string
     {
         $score = "";
-        if ($this->player1NumericalScore == self::LOVE_SCORE) {
+        if ($numericalScore == self::LOVE_SCORE) {
             $score = "Love";
         }
-        if ($this->player1NumericalScore == self::FIFTEEN_SCORE) {
+        if ($numericalScore == self::FIFTEEN_SCORE) {
             $score = "Fifteen";
         }
-        if ($this->player1NumericalScore == self::THIRTY_SCORE) {
+        if ($numericalScore == self::THIRTY_SCORE) {
             $score = "Thirty";
         }
 
-        if ($this->player1NumericalScore == self::FORTY_SCORE) {
+        if ($numericalScore == self::FORTY_SCORE) {
             $score = "Forty";
         }
         return $score;
