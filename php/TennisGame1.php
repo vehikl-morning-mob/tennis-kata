@@ -3,10 +3,12 @@
 class Player
 {
     public $name;
+    public $score;
 
-    public function __construct(string $name)
+    public function __construct(string $name, string $score)
     {
         $this->name = $name;
+        $this->score = $score;
     }
 }
 
@@ -17,30 +19,28 @@ class TennisGame1 implements TennisGame
     private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
     private const DEUCE = "Deuce";
     private const TIED_SCORE_SUFFIX = "-All";
-    private int $player1NumericalScore = 0;
-    private int $player2NumericalScore = 0;
 
     private Player $player1;
     private Player $player2;
 
     public function __construct(string $player1Name, string $player2Name)
     {
-        $this->player1 = new Player($player1Name);
-        $this->player2 = new Player($player2Name);
+        $this->player1 = new Player($player1Name, 0);
+        $this->player2 = new Player($player2Name, 0);
     }
 
     public function wonPoint($playerName)
     {
         if (self::PLAYER_1_NAME == $playerName) {
-            $this->player1NumericalScore++;
+            $this->player1->score++;
         } else {
-            $this->player2NumericalScore++;
+            $this->player2->score++;
         }
     }
 
     public function getScore()
     {
-        if ($this->player1NumericalScore == $this->player2NumericalScore) {
+        if ($this->player1->score == $this->player2->score) {
             return $this->stringifyScoreForTiedGame();
         }
         if ($this->hasSomeoneReachedFortyPoints()) {
@@ -52,32 +52,32 @@ class TennisGame1 implements TennisGame
 
     public function stringifyScoreForUntiedGame(): string
     {
-        $player1StringifiedScore = self::STRINGIFIED_SCORES[$this->player1NumericalScore];
-        $player2StringifiedScore = self::STRINGIFIED_SCORES[$this->player2NumericalScore];
+        $player1StringifiedScore = self::STRINGIFIED_SCORES[$this->player1->score];
+        $player2StringifiedScore = self::STRINGIFIED_SCORES[$this->player2->score];
         return $player1StringifiedScore . '-' . $player2StringifiedScore;
     }
 
     public function stringifyScoreForTiedGame(): string
     {
-        if ($this->player1NumericalScore > 2) {
+        if ($this->player1->score > 2) {
             return self::DEUCE;
         }
-        return self::STRINGIFIED_SCORES[$this->player1NumericalScore] . self::TIED_SCORE_SUFFIX;
+        return self::STRINGIFIED_SCORES[$this->player1->score] . self::TIED_SCORE_SUFFIX;
     }
 
     public function hasSomeoneReachedFortyPoints(): bool
     {
-        return $this->player1NumericalScore >= count(self::STRINGIFIED_SCORES)
-            || $this->player2NumericalScore >= count(self::STRINGIFIED_SCORES);
+        return $this->player1->score >= count(self::STRINGIFIED_SCORES)
+            || $this->player2->score >= count(self::STRINGIFIED_SCORES);
     }
 
     public function getDeltaScore(): int
     {
-        return abs($this->player1NumericalScore - $this->player2NumericalScore);
+        return abs($this->player1->score - $this->player2->score);
     }
 
     public function getLeadingPlayerName()
     {
-        return $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1->name : $this->player2->name;
+        return $this->player1->score > $this->player2->score ? $this->player1->name : $this->player2->name;
     }
 }
