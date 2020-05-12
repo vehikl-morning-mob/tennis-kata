@@ -3,13 +3,12 @@
 class Player
 {
     public $name;
-    public $score;
+    public $score = 0;
     private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
 
-    public function __construct(string $name, int $score = 0)
+    public function __construct(string $name)
     {
         $this->name = $name;
-        $this->score = $score;
     }
 
     public function getScoreAsString(): string
