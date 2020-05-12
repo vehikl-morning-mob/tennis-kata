@@ -5,7 +5,7 @@ class Player
     public $name;
     public $score;
 
-    public function __construct(string $name, string $score)
+    public function __construct(string $name, int $score = 0 )
     {
         $this->name = $name;
         $this->score = $score;
@@ -25,8 +25,8 @@ class TennisGame1 implements TennisGame
 
     public function __construct(string $player1Name, string $player2Name)
     {
-        $this->player1 = new Player($player1Name, 0);
-        $this->player2 = new Player($player2Name, 0);
+        $this->player1 = new Player($player1Name);
+        $this->player2 = new Player($player2Name);
     }
 
     public function wonPoint($playerName)
