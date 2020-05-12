@@ -16,6 +16,11 @@ class Player
     {
         return self::STRINGIFIED_SCORES[$this->score];
     }
+
+    public function hasReachedFortyPoints(): bool
+    {
+        return $this->score >= count(self::STRINGIFIED_SCORES);
+    }
 }
 
 class TennisGame1 implements TennisGame
@@ -71,8 +76,7 @@ class TennisGame1 implements TennisGame
 
     public function hasSomeoneReachedFortyPoints(): bool
     {
-        return $this->player1->score >= count(self::STRINGIFIED_SCORES)
-            || $this->player2->score >= count(self::STRINGIFIED_SCORES);
+        return $this->player1->hasReachedFortyPoints() || $this->player2->hasReachedFortyPoints();
     }
 
     public function getDeltaScore(): int
