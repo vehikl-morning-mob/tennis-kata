@@ -23,57 +23,33 @@ class TennisGame2 implements TennisGame
 
     public function getScore()
     {
-        $score = "";
-        if ($this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE) {
-            $score = $this->getStringifiedScore($this->player1NumericalScore);
-            $score .= "-All";
-        }
-
         if ($this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE) {
-            $score = "Deuce";
+            return "Deuce";
         }
 
-        if ($this->player1NumericalScore > self::LOVE_SCORE && $this->player2NumericalScore == self::LOVE_SCORE) {
-            $this->player1StringifiedScore = $this->getStringifiedScore($this->player1NumericalScore);
-            $this->player2StringifiedScore = $this->getStringifiedScore($this->player2NumericalScore);
-            $score = "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
-        }
-
-        if ($this->player2NumericalScore > self::LOVE_SCORE && $this->player1NumericalScore == self::LOVE_SCORE) {
-            $this->player1StringifiedScore = $this->getStringifiedScore($this->player1NumericalScore);
-            $this->player2StringifiedScore = $this->getStringifiedScore($this->player2NumericalScore);
-            $score = "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
-        }
-
-        if ($this->player1NumericalScore > $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE) {
-            $this->player1StringifiedScore = $this->getStringifiedScore($this->player1NumericalScore);
-            $this->player2StringifiedScore = $this->getStringifiedScore($this->player2NumericalScore);
-            $score = "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
-        }
-
-        if ($this->player2NumericalScore > $this->player1NumericalScore && $this->player2NumericalScore < self::MAX_SCORE) {
-            $this->player1StringifiedScore = $this->getStringifiedScore($this->player1NumericalScore);
-            $this->player2StringifiedScore = $this->getStringifiedScore($this->player2NumericalScore);
-            $score = "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
-        }
-
-        if ($this->player1NumericalScore > $this->player2NumericalScore && $this->player2NumericalScore >= self::FORTY_SCORE) {
-            $score = "Advantage player1";
-        }
-
-        if ($this->player2NumericalScore > $this->player1NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE) {
-            $score = "Advantage player2";
+        if ($this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE) {
+            return $this->getStringifiedScore($this->player1NumericalScore) . "-All";
         }
 
         if ($this->player1NumericalScore >= self::MAX_SCORE && $this->player2NumericalScore >= self::LOVE_SCORE && ($this->player1NumericalScore - $this->player2NumericalScore) >= self::THIRTY_SCORE) {
-            $score = "Win for player1";
+            return "Win for player1";
         }
 
         if ($this->player2NumericalScore >= self::MAX_SCORE && $this->player1NumericalScore >= self::LOVE_SCORE && ($this->player2NumericalScore - $this->player1NumericalScore) >= self::THIRTY_SCORE) {
-            $score = "Win for player2";
+            return "Win for player2";
         }
 
-        return $score;
+        if ($this->player1NumericalScore > $this->player2NumericalScore && $this->player2NumericalScore >= self::FORTY_SCORE) {
+            return "Advantage player1";
+        }
+
+        if ($this->player2NumericalScore > $this->player1NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE) {
+            return "Advantage player2";
+        }
+
+        $this->player1StringifiedScore = $this->getStringifiedScore($this->player1NumericalScore);
+        $this->player2StringifiedScore = $this->getStringifiedScore($this->player2NumericalScore);
+        return "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
     }
 
     private function P1Score()
