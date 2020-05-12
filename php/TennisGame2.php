@@ -25,15 +25,7 @@ class TennisGame2 implements TennisGame
     {
         $score = "";
         if ($this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE) {
-            if ($this->player1NumericalScore == self::LOVE_SCORE) {
-                $score = "Love";
-            }
-            if ($this->player1NumericalScore == self::FIFTEEN_SCORE) {
-                $score = "Fifteen";
-            }
-            if ($this->player1NumericalScore == self::THIRTY_SCORE) {
-                $score = "Thirty";
-            }
+            $score = $this->getStringifiedScore();
             $score .= "-All";
         }
 
@@ -42,16 +34,7 @@ class TennisGame2 implements TennisGame
         }
 
         if ($this->player1NumericalScore > self::LOVE_SCORE && $this->player2NumericalScore == self::LOVE_SCORE) {
-            if ($this->player1NumericalScore == self::FIFTEEN_SCORE) {
-                $this->player1StringifiedScore = "Fifteen";
-            }
-            if ($this->player1NumericalScore == self::THIRTY_SCORE) {
-                $this->player1StringifiedScore = "Thirty";
-            }
-            if ($this->player1NumericalScore == self::FORTY_SCORE) {
-                $this->player1StringifiedScore = "Forty";
-            }
-
+            $this->player1StringifiedScore = $this->getStringifiedScore();
             $this->player2StringifiedScore = "Love";
             $score = "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
         }
@@ -71,12 +54,7 @@ class TennisGame2 implements TennisGame
         }
 
         if ($this->player1NumericalScore > $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE) {
-            if ($this->player1NumericalScore == self::THIRTY_SCORE) {
-                $this->player1StringifiedScore = "Thirty";
-            }
-            if ($this->player1NumericalScore == self::FORTY_SCORE) {
-                $this->player1StringifiedScore = "Forty";
-            }
+            $this->player1StringifiedScore = $this->getStringifiedScore();
             if ($this->player2NumericalScore == self::FIFTEEN_SCORE) {
                 $this->player2StringifiedScore = "Fifteen";
             }
@@ -138,5 +116,24 @@ class TennisGame2 implements TennisGame
         } else {
             $this->P2Score();
         }
+    }
+
+    public function getStringifiedScore(): string
+    {
+        $score = "";
+        if ($this->player1NumericalScore == self::LOVE_SCORE) {
+            $score = "Love";
+        }
+        if ($this->player1NumericalScore == self::FIFTEEN_SCORE) {
+            $score = "Fifteen";
+        }
+        if ($this->player1NumericalScore == self::THIRTY_SCORE) {
+            $score = "Thirty";
+        }
+
+        if ($this->player1NumericalScore == self::FORTY_SCORE) {
+            $score = "Forty";
+        }
+        return $score;
     }
 }
