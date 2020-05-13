@@ -10,8 +10,6 @@ class TennisGame2 implements TennisGame
     private $player1NumericalScore = 0;
     private $player2NumericalScore = 0;
 
-    private $player1StringifiedScore = "";
-    private $player2StringifiedScore = "";
     private $player1Name = "";
     private $player2Name = "";
 
