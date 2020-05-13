@@ -41,12 +41,8 @@ class TennisGame2 implements TennisGame
             return "Win for " . $this->getWinner();
         }
 
-        if ($this->isAdvantagePlayer1()) {
-            return "Advantage player1";
-        }
-
-        if ($this->isAdvantagePlayer2()) {
-            return "Advantage player2";
+        if ($this->isLateGame()) {
+            return "Advantage " . $this->getAdvantagee();
         }
 
         $this->player1StringifiedScore = $this->getStringifiedScore($this->player1NumericalScore);
@@ -108,18 +104,18 @@ class TennisGame2 implements TennisGame
         return $this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE;
     }
 
-    public function isAdvantagePlayer1(): bool
+    private function getAdvantagee()
     {
-        return $this->player1NumericalScore > $this->player2NumericalScore && $this->player2NumericalScore >= self::FORTY_SCORE;
-    }
-
-    public function isAdvantagePlayer2(): bool
-    {
-        return $this->player2NumericalScore > $this->player1NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE;
+        return $this->player1NumericalScore > $this->player2NumericalScore ? "player1" : "player2";
     }
 
     private function getWinner()
     {
         return $this->player1NumericalScore >= $this->player2NumericalScore ? "player1" : "player2";
+    }
+
+    private function isLateGame()
+    {
+        return $this->player2NumericalScore >= self::FORTY_SCORE && $this->player1NumericalScore >= self::FORTY_SCORE;
     }
 }
