@@ -19,12 +19,12 @@ class TennisGame3 implements TennisGame
 
     public function getScore()
     {
-        if ($this->isEarlyGame() && !($this->player1NumericalScore + $this->player2NumericalScore == self::SUM_OF_SCORES)) {
-            return ($this->player1NumericalScore == $this->player2NumericalScore)
+        if ($this->isEarlyGame() && ($this->player1NumericalScore + $this->player2NumericalScore) != self::SUM_OF_SCORES) {
+            return ($this->isTied())
                 ? self::STRINGIFIED_SCORES[$this->player1NumericalScore]."-All"
                 : self::STRINGIFIED_SCORES[$this->player1NumericalScore]."-".self::STRINGIFIED_SCORES[$this->player2NumericalScore];
         } else {
-            if ($this->player1NumericalScore == $this->player2NumericalScore) {
+            if ($this->isTied()) {
                 return self::DEUCE;
             }
             $leadingPlayerName = $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
@@ -46,6 +46,11 @@ class TennisGame3 implements TennisGame
     public function isEarlyGame(): bool
     {
         return $this->player1NumericalScore < self::MAX_SCORE && $this->player2NumericalScore < self::MAX_SCORE;
+    }
+
+    public function isTied(): bool
+    {
+        return $this->player1NumericalScore == $this->player2NumericalScore;
     }
 }
 
