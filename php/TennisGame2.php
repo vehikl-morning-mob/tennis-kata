@@ -28,7 +28,7 @@ class TennisGame2 implements TennisGame
         }
 
         if ($this->isAll()) {
-            return $this->getStringifiedScore($this->player1NumericalScore) . "-All";
+            return self::STRINGIFIED_SCORES[$this->player1NumericalScore] . "-All";
         }
 
         if ($this->isGameOver()) {
@@ -39,8 +39,8 @@ class TennisGame2 implements TennisGame
             return "Advantage " . $this->getLeadingPlayer();
         }
 
-        $this->player1StringifiedScore = $this->getStringifiedScore($this->player1NumericalScore);
-        $this->player2StringifiedScore = $this->getStringifiedScore($this->player2NumericalScore);
+        $this->player1StringifiedScore = self::STRINGIFIED_SCORES[$this->player1NumericalScore];
+        $this->player2StringifiedScore = self::STRINGIFIED_SCORES[$this->player2NumericalScore];
         return "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
     }
 
@@ -61,11 +61,6 @@ class TennisGame2 implements TennisGame
         } else {
             $this->increasePlayer2Score();
         }
-    }
-
-    public function getStringifiedScore(int $numericalScore): string
-    {
-        return self::STRINGIFIED_SCORES[$numericalScore];
     }
 
     public function isGameOver()
