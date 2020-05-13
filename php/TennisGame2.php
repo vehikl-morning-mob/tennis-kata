@@ -44,22 +44,12 @@ class TennisGame2 implements TennisGame
         return "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
     }
 
-    private function increasePlayer1Score()
-    {
-        $this->player1NumericalScore++;
-    }
-
-    private function increasePlayer2Score()
-    {
-        $this->player2NumericalScore++;
-    }
-
     public function wonPoint($player)
     {
         if ($player == "player1") {
-            $this->increasePlayer1Score();
+            $this->player1NumericalScore++;
         } else {
-            $this->increasePlayer2Score();
+            $this->player2NumericalScore++;
         }
     }
 
