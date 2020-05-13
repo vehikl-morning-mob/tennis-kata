@@ -5,6 +5,7 @@ class TennisGame3 implements TennisGame
     private const MAX_SCORE = 4;
     private const SUM_OF_SCORES = 6;
     private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
+    private const DEUCE = "Deuce";
     private $p2 = 0;
     private $p1 = 0;
     private $p1N = '';
@@ -23,7 +24,7 @@ class TennisGame3 implements TennisGame
             return ($this->p1 == $this->p2) ? "{$s}-All" : $s."-".self::STRINGIFIED_SCORES[$this->p2];
         } else {
             if ($this->p1 == $this->p2) {
-                return "Deuce";
+                return self::DEUCE;
             }
             $s = $this->p1 > $this->p2 ? $this->p1N : $this->p2N;
             return (($this->p1 - $this->p2) * ($this->p1 - $this->p2) == 1) ? "Advantage {$s}" : "Win for {$s}";
