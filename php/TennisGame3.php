@@ -20,8 +20,10 @@ class TennisGame3 implements TennisGame
     public function getScore()
     {
         if ($this->player1NumericalScore < self::MAX_SCORE && $this->player2NumericalScore < self::MAX_SCORE && !($this->player1NumericalScore + $this->player2NumericalScore == self::SUM_OF_SCORES)) {
-            $s = self::STRINGIFIED_SCORES[$this->player1NumericalScore];
-            return ($this->player1NumericalScore == $this->player2NumericalScore) ? "{$s}-All" : $s."-".self::STRINGIFIED_SCORES[$this->player2NumericalScore];
+
+            return ($this->player1NumericalScore == $this->player2NumericalScore)
+                ? self::STRINGIFIED_SCORES[$this->player1NumericalScore]."-All"
+                : self::STRINGIFIED_SCORES[$this->player1NumericalScore]."-".self::STRINGIFIED_SCORES[$this->player2NumericalScore];
         } else {
             if ($this->player1NumericalScore == $this->player2NumericalScore) {
                 return self::DEUCE;
