@@ -61,12 +61,12 @@ class TennisGame2 implements TennisGame
 
     public function isDeuce(): bool
     {
-        return $this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore >= self::FORTY_SCORE;
+        return $this->isGameTied() && $this->player1NumericalScore >= self::FORTY_SCORE;
     }
 
     public function isAll(): bool
     {
-        return $this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE;
+        return $this->isGameTied() && $this->player1NumericalScore < self::MAX_SCORE;
     }
 
     private function getLeadingPlayer()
@@ -77,5 +77,13 @@ class TennisGame2 implements TennisGame
     private function isLateGame()
     {
         return $this->player2NumericalScore >= self::FORTY_SCORE && $this->player1NumericalScore >= self::FORTY_SCORE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGameTied(): bool
+    {
+        return $this->player1NumericalScore == $this->player2NumericalScore;
     }
 }
