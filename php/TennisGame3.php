@@ -20,9 +20,8 @@ class TennisGame3 implements TennisGame
     public function getScore()
     {
         if ($this->isEarlyGame() && $this->scoreIsNotTiedAt40()) {
-            return ($this->isTied())
-                ? self::STRINGIFIED_SCORES[$this->player1NumericalScore]."-All"
-                : self::STRINGIFIED_SCORES[$this->player1NumericalScore]."-".self::STRINGIFIED_SCORES[$this->player2NumericalScore];
+            return self::STRINGIFIED_SCORES[$this->player1NumericalScore] .
+                ($this->isTied() ? "-All" : "-".self::STRINGIFIED_SCORES[$this->player2NumericalScore]);
         } else {
             if ($this->isTied()) {
                 return self::DEUCE;
