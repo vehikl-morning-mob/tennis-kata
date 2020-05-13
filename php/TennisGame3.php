@@ -23,11 +23,10 @@ class TennisGame3 implements TennisGame
             return $this->isEarlyGame() ? self::STRINGIFIED_SCORES[$this->player1NumericalScore] . "-All" : self::DEUCE;
         }
         if ($this->isEarlyGame()) {
-            return self::STRINGIFIED_SCORES[$this->player1NumericalScore] . "-" . self::STRINGIFIED_SCORES[$this->player2NumericalScore];
+            return $this->getRegularScore();
         } else {
-            return (abs($this->player1NumericalScore - $this->player2NumericalScore) == 1)
-                ? "Advantage {$this->getLeadingPlayerName()}"
-                : "Win for {$this->getLeadingPlayerName()}";
+            return ((abs($this->player1NumericalScore - $this->player2NumericalScore) == 1)
+                ? "Advantage " : "Win for ") . $this->getLeadingPlayerName();
         }
     }
 
@@ -54,6 +53,11 @@ class TennisGame3 implements TennisGame
     public function getLeadingPlayerName(): string
     {
         return $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
+    }
+
+    public function getRegularScore(): string
+    {
+        return self::STRINGIFIED_SCORES[$this->player1NumericalScore] . "-" . self::STRINGIFIED_SCORES[$this->player2NumericalScore];
     }
 }
 
