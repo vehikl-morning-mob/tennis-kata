@@ -28,8 +28,8 @@ class TennisGame3 implements TennisGame
             if ($this->player1NumericalScore == $this->player2NumericalScore) {
                 return self::DEUCE;
             }
-            $s = $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
-            return (($this->player1NumericalScore - $this->player2NumericalScore) * ($this->player1NumericalScore - $this->player2NumericalScore) == 1) ? "Advantage {$s}" : "Win for {$s}";
+            $leadingPlayerName = $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
+            return (($this->player1NumericalScore - $this->player2NumericalScore) * ($this->player1NumericalScore - $this->player2NumericalScore) == 1) ? "Advantage {$leadingPlayerName}" : "Win for {$leadingPlayerName}";
         }
     }
 
