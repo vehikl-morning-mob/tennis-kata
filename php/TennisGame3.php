@@ -27,10 +27,9 @@ class TennisGame3 implements TennisGame
             if ($this->isTied()) {
                 return self::DEUCE;
             }
-            $leadingPlayerName = $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
             return (abs($this->player1NumericalScore - $this->player2NumericalScore) == 1)
-                ? "Advantage {$leadingPlayerName}"
-                : "Win for {$leadingPlayerName}";
+                ? "Advantage {$this->getLeadingPlayerName()}"
+                : "Win for {$this->getLeadingPlayerName()}";
         }
     }
 
@@ -51,6 +50,11 @@ class TennisGame3 implements TennisGame
     public function isTied(): bool
     {
         return $this->player1NumericalScore == $this->player2NumericalScore;
+    }
+
+    public function getLeadingPlayerName(): string
+    {
+        return $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
     }
 }
 
