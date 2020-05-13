@@ -38,11 +38,11 @@ class TennisGame2 implements TennisGame
         }
 
         if ($this->isGameOver()) {
-            return "Win for " . $this->getWinner();
+            return "Win for " . $this->getLeadingPlayer();
         }
 
         if ($this->isLateGame()) {
-            return "Advantage " . $this->getAdvantagee();
+            return "Advantage " . $this->getLeadingPlayer();
         }
 
         $this->player1StringifiedScore = $this->getStringifiedScore($this->player1NumericalScore);
@@ -104,14 +104,9 @@ class TennisGame2 implements TennisGame
         return $this->player1NumericalScore == $this->player2NumericalScore && $this->player1NumericalScore < self::MAX_SCORE;
     }
 
-    private function getAdvantagee()
+    private function getLeadingPlayer()
     {
         return $this->player1NumericalScore > $this->player2NumericalScore ? "player1" : "player2";
-    }
-
-    private function getWinner()
-    {
-        return $this->player1NumericalScore >= $this->player2NumericalScore ? "player1" : "player2";
     }
 
     private function isLateGame()
