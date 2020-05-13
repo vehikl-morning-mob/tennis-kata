@@ -3,9 +3,9 @@
 class TennisGame3 implements TennisGame
 {
     private const MAX_SCORE = 4;
-    private const SUM_OF_SCORES = 6;
     private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
     private const DEUCE = "Deuce";
+    private const FORTY_POINTS = 3;
     private $player2NumericalScore = 0;
     private $player1NumericalScore = 0;
     private $player1Name = '';
@@ -20,16 +20,18 @@ class TennisGame3 implements TennisGame
     public function getScore()
     {
         if ($this->isTied()) {
-            return $this->isEarlyGame() ? self::STRINGIFIED_SCORES[$this->player1NumericalScore] . "-All" : self::DEUCE;
+            return $this->player1NumericalScore >= self::FORTY_POINTS
+                ? self::DEUCE
+                : self::STRINGIFIED_SCORES[$this->player1NumericalScore] . "-All";
         }
-        if ($this->isEarlyGame()) {
-            return $this->getRegularScore();
+        if ($this->isLateGame()) {
+            $prefix = abs($this->player1NumericalScore - $this->player2NumericalScore) == 1
+                ? "Advantage"
+                : "Win for";
+            return "{$prefix} {$this->getLeadingPlayerName()}";
         }
 
-        $prefix = abs($this->player1NumericalScore - $this->player2NumericalScore) == 1
-            ? "Advantage"
-            : "Win for";
-        return "{$prefix} {$this->getLeadingPlayerName()}";
+        return $this->getRegularScore();
     }
 
     public function wonPoint($playerName)
@@ -41,10 +43,9 @@ class TennisGame3 implements TennisGame
         }
     }
 
-    public function isEarlyGame(): bool
+    public function isLateGame(): bool
     {
-        return ($this->player1NumericalScore < self::MAX_SCORE && $this->player2NumericalScore < self::MAX_SCORE)
-            && ($this->player1NumericalScore + $this->player2NumericalScore != self::SUM_OF_SCORES);
+        return $this->player1NumericalScore >= self::MAX_SCORE || $this->player2NumericalScore >= self::MAX_SCORE;
     }
 
     public function isTied(): bool
