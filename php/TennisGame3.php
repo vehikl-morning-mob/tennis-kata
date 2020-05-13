@@ -24,10 +24,12 @@ class TennisGame3 implements TennisGame
         }
         if ($this->isEarlyGame()) {
             return $this->getRegularScore();
-        } else {
-            return ((abs($this->player1NumericalScore - $this->player2NumericalScore) == 1)
-                ? "Advantage " : "Win for ") . $this->getLeadingPlayerName();
         }
+
+        $prefix = abs($this->player1NumericalScore - $this->player2NumericalScore) == 1
+            ? "Advantage"
+            : "Win for";
+        return "{$prefix} {$this->getLeadingPlayerName()}";
     }
 
     public function wonPoint($playerName)
