@@ -3,15 +3,9 @@
 class TennisGame2 implements TennisGame
 {
     private const MAX_SCORE = 4;
-    private const LOVE_SCORE = 0;
-    private const THIRTY_SCORE = 2;
     private const FORTY_SCORE = 3;
-    private const FIFTEEN_SCORE = 1;
+    private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
     private const DEUCE = "Deuce";
-    private const LOVE = "Love";
-    private const FIFTEEN = "Fifteen";
-    private const THIRTY = "Thirty";
-    private const FORTY = "Forty";
     private const DELTA_SCORE_TO_WIN = 2;
     private $player1NumericalScore = 0;
     private $player2NumericalScore = 0;
@@ -71,21 +65,7 @@ class TennisGame2 implements TennisGame
 
     public function getStringifiedScore(int $numericalScore): string
     {
-        $score = "";
-        if ($numericalScore == self::LOVE_SCORE) {
-            $score = self::LOVE;
-        }
-        if ($numericalScore == self::FIFTEEN_SCORE) {
-            $score = self::FIFTEEN;
-        }
-        if ($numericalScore == self::THIRTY_SCORE) {
-            $score = self::THIRTY;
-        }
-
-        if ($numericalScore == self::FORTY_SCORE) {
-            $score = self::FORTY;
-        }
-        return $score;
+        return self::STRINGIFIED_SCORES[$numericalScore];
     }
 
     public function isGameOver()
