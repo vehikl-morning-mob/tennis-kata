@@ -6,37 +6,37 @@ class TennisGame3 implements TennisGame
     private const SUM_OF_SCORES = 6;
     private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
     private const DEUCE = "Deuce";
-    private $p2 = 0;
-    private $p1 = 0;
-    private $p1N = '';
-    private $p2N = '';
+    private $player2NumericalScore = 0;
+    private $player1NumericalScore = 0;
+    private $player1Name = '';
+    private $player2Name = '';
 
-    public function __construct($p1N, $p2N)
+    public function __construct($player1Name, $player2Name)
     {
-        $this->p1N = $p1N;
-        $this->p2N = $p2N;
+        $this->player1Name = $player1Name;
+        $this->player2Name = $player2Name;
     }
 
     public function getScore()
     {
-        if ($this->p1 < self::MAX_SCORE && $this->p2 < self::MAX_SCORE && !($this->p1 + $this->p2 == self::SUM_OF_SCORES)) {
-            $s = self::STRINGIFIED_SCORES[$this->p1];
-            return ($this->p1 == $this->p2) ? "{$s}-All" : $s."-".self::STRINGIFIED_SCORES[$this->p2];
+        if ($this->player1NumericalScore < self::MAX_SCORE && $this->player2NumericalScore < self::MAX_SCORE && !($this->player1NumericalScore + $this->player2NumericalScore == self::SUM_OF_SCORES)) {
+            $s = self::STRINGIFIED_SCORES[$this->player1NumericalScore];
+            return ($this->player1NumericalScore == $this->player2NumericalScore) ? "{$s}-All" : $s."-".self::STRINGIFIED_SCORES[$this->player2NumericalScore];
         } else {
-            if ($this->p1 == $this->p2) {
+            if ($this->player1NumericalScore == $this->player2NumericalScore) {
                 return self::DEUCE;
             }
-            $s = $this->p1 > $this->p2 ? $this->p1N : $this->p2N;
-            return (($this->p1 - $this->p2) * ($this->p1 - $this->p2) == 1) ? "Advantage {$s}" : "Win for {$s}";
+            $s = $this->player1NumericalScore > $this->player2NumericalScore ? $this->player1Name : $this->player2Name;
+            return (($this->player1NumericalScore - $this->player2NumericalScore) * ($this->player1NumericalScore - $this->player2NumericalScore) == 1) ? "Advantage {$s}" : "Win for {$s}";
         }
     }
 
     public function wonPoint($playerName)
     {
         if ($playerName == "player1") {
-            $this->p1++;
+            $this->player1NumericalScore++;
         } else {
-            $this->p2++;
+            $this->player2NumericalScore++;
         }
     }
 }
