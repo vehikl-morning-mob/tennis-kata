@@ -35,9 +35,8 @@ class TennisGame2 implements TennisGame
             return "Advantage " . $this->getLeadingPlayer();
         }
 
-        $this->player1StringifiedScore = self::STRINGIFIED_SCORES[$this->player1NumericalScore];
-        $this->player2StringifiedScore = self::STRINGIFIED_SCORES[$this->player2NumericalScore];
-        return "{$this->player1StringifiedScore}-{$this->player2StringifiedScore}";
+        return self::STRINGIFIED_SCORES[$this->player1NumericalScore] . "-" .
+            self::STRINGIFIED_SCORES[$this->player2NumericalScore];
     }
 
     public function wonPoint($player)
