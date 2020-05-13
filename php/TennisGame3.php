@@ -2,6 +2,9 @@
 
 class TennisGame3 implements TennisGame
 {
+    private const MAX_SCORE = 4;
+    private const SUM_OF_SCORES = 6;
+    private const STRINGIFIED_SCORES = ["Love", "Fifteen", "Thirty", "Forty"];
     private $p2 = 0;
     private $p1 = 0;
     private $p1N = '';
@@ -15,10 +18,9 @@ class TennisGame3 implements TennisGame
 
     public function getScore()
     {
-        if ($this->p1 < 4 && $this->p2 < 4 && !($this->p1 + $this->p2 == 6)) {
-            $p = array("Love", "Fifteen", "Thirty", "Forty");
-            $s = $p[$this->p1];
-            return ($this->p1 == $this->p2) ? "{$s}-All" : "{$s}-{$p[$this->p2]}";
+        if ($this->p1 < self::MAX_SCORE && $this->p2 < self::MAX_SCORE && !($this->p1 + $this->p2 == self::SUM_OF_SCORES)) {
+            $s = self::STRINGIFIED_SCORES[$this->p1];
+            return ($this->p1 == $this->p2) ? "{$s}-All" : $s."-".self::STRINGIFIED_SCORES[$this->p2];
         } else {
             if ($this->p1 == $this->p2) {
                 return "Deuce";
@@ -36,6 +38,5 @@ class TennisGame3 implements TennisGame
             $this->p2++;
         }
     }
-
 }
 
